@@ -37,7 +37,7 @@ $(document).on('pageinit', '#reader', function() {
             TweenMax.to($(document).find('.ten'), 1.3, {
                 y: "-=500",
                 onComplete: function() {
-        		    yomuu.blinkLedN(12, 100);
+        		    // yomuu.blinkLedN(12, 100);
 
                     if (!isNextText()) {
                         // デバック
