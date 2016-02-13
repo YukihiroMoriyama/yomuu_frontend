@@ -1,0 +1,27 @@
+<ons-navigator title="Navigator" var="myNavigator">
+    <ons-toolbar>
+        <div class="left">
+            <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="fa-bars"></ons-icon></ons-toolbar-button>
+       </div>
+       <div class="center">本棚</div>
+    </ons-toolbar>
+
+    <ons-list>
+        <ons-list-item modifier="chevron" class="list-item-container" onclick="myNavigator.pushPage('reader.html', { animation : 'slide' } )">
+            <ons-row>
+                <ons-col width="95px">
+                    <img src="img/book1.png" height="145" width="112" class="thumbnail">
+                </ons-col>
+                <ons-col>
+                    <div class="name">
+                        吾輩は猫である
+                    </div>
+                    <div class="desc">
+                        夏目漱石
+                    </div>
+                </ons-col>
+                <ons-col width="40px"></ons-col>
+            </ons-row>
+        </ons-list-item>
+    </ons-list>
+</ons-navigator>
