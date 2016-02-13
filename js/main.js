@@ -42,13 +42,13 @@ $(document).on('pageinit', '#reader', function() {
                         pages[pages.length - 2].destroy();
                         myNavigator.popPage();
                     }
-                    showContents()
+                    showContents();
                 }
             }, 0.1);
         }
 
         function showContents() {
-            var text = ""
+            var text = "";
             for (var i = 0; i < 5; i++) {
                 text += texts[start] + "。";
                 start++;
