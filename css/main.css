@@ -31,3 +31,7 @@
 .ten {
   display: inline-block;
 }
+
+p {
+  font-size: 22px;
+}

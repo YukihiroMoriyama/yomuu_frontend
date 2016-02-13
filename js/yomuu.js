@@ -15,6 +15,29 @@ yomuu.extractTextFeature = function(text) {
     };
 };
 
+yomuu.grantAlignment = function(text) {
+    var result = "";
+    tmp = text.split('。');
+    for (var i = 0; i < tmp.length; i++) {
+        if (i !== tmp.length - 1) {
+            result = result + (tmp[i] + "<div class='ten'>。</div>");
+        }
+    }
+
+    var tmp = result.split('、');
+    if (tmp.length >= 2) {
+        result = ""
+        for (var i = 0; i < tmp.length; i++) {
+            if (i !== tmp.length - 1) {
+                result += (tmp[i] + "<div class='ten'>、</div>");
+            } else {
+                result += tmp[i];
+            }
+        }
+    }
+    return "<br><br><br><br>" + result;
+}
+
 // var text = '本日は、晴aaaa天なりaaa。、、、、。。';
 // console.log(yomuu.extractTextFeature(text));
 
