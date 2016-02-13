@@ -5,9 +5,11 @@ $(document).on('pageinit', '#reader', function() {
         var end = texts.length;
 
         $(document).find('p').html(texts[start]);
-        $(document).on('touchstart', 'p', function() {
-            console.log("左スワイプが検知されました");
 
+        $(document).on('touchstart', '#reader ons-back-button', offEvent);
+        $(document).on('touchstart', 'p', requestTextFeature);
+
+        function requestTextFeature() {
             var $request = $.ajax({
                 type: 'post',
                 url: 'https://yomuu-api.herokuapp.com/textFeature',
@@ -31,6 +33,10 @@ $(document).on('pageinit', '#reader', function() {
             // start++;
             // if (start >= end) return;
             // $(document).find("p").html(texts[start]);
-        });
+        }
+
+        function offEvent() {
+            $(document).off('touchstart', 'p', requestTextFeature);
+        }
     });
 });
