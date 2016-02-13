@@ -1,0 +1,39 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="./lib/onsenui/css/onsenui.css">
+<link rel="stylesheet" href="./lib/onsenui/css/onsen-css-components.css">
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<script src="./lib/onsenui/js/angular/angular.js"></script>
+<script src="./lib/onsenui/js/onsenui.js"></script>
+<script src="./lib/jquery-2.2.0.min.js"></script>
+<script src="./lib/TweenMax.min.js"></script>
+<script src="./lib/ayatori.js"></script>
+
+<script>
+  ons.bootstrap();
+</script>
+
+<body>
+    <ons-navigator title="Navigator" var="myNavigator">
+        <ons-page>
+            <ons-toolbar>
+                <div class="center">トップページ</div>
+            </ons-toolbar>
+            <div style="text-align: center">
+                <br>
+                <ons-button modifier="quiet" onclick="myNavigator.pushPage('bookshelf.html', { animation : 'slide' } )">
+                    <!-- TODO: 画像変更 -->
+                    <img src="img/book5.png" width="80%">
+                </ons-button>
+                <br>
+                <ons-button modifier="quiet" onclick="myNavigator.pushPage('log.html', { animation : 'slide' } )">
+                    <!-- TODO: 画像変更 -->
+                    <img src="img/tenmaru.gif" height="100" width="100">
+                </ons-button>
+            </div>
+        </ons-page>
+    </ons-navigator>
+
+    <script src="./js/yomuu.js"></script>
+    <script src="./js/main.js"></script>
+</body>
