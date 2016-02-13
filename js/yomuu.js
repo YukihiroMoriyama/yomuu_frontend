@@ -14,8 +14,22 @@ yomuu.extractTextFeature = function(text) {
 	"length": text.length
     };
 };
-
 // var text = '本日は、晴aaaa天なりaaa。、、、、。。';
 // console.log(yomuu.extractTextFeature(text));
 
+yomuu.blinkLed = function() {
+    var ayatori = new VincluLed(100, 100);
 
+    var on = function() {
+	ayatori.on();
+    };
+
+    var off = function() {
+	ayatori.off();
+    };
+
+    on();
+
+    setTimeout(off, 10);
+};
+// yomuu.blinkLed();
