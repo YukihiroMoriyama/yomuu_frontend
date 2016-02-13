@@ -14,10 +14,10 @@
   });
 </script>
 <body>
-  <ons-navigator title="Navigator" var="myNavigator">
-    <ons-page>
-      <ons-button onclick="myNavigator.pushPage('page2.html')">Next Page</ons-button>
-      <div id="my-content"></div>
-    </ons-page>
-  </ons-navigator>
+    <ons-sliding-menu
+      main-page="bookshelf.html"
+      menu-page="menu.html"
+      side="left"
+      var="menu">
+    </ons-sliding-menu>
 </body>
