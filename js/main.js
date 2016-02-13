@@ -24,7 +24,7 @@ $(document).on('pageinit', '#reader', function() {
             TweenMax.to($(document).find('.ten'), 1.3, {
                 y: "-=500",
                 onComplete: function() {
-		    yomuu.blinkLed();
+        		    // yomuu.blinkLed( );
 
                     if (isNextText()) {
                         var pages = myNavigator.getPages();
