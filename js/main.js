@@ -39,9 +39,8 @@ $(document).on('pageinit', '#reader', function() {
         }
 
         function requestTextFeature() {
-
-	    var result = yomuu.extractTextFeature(texts[start]);
-	    console.log(result);
+    	    var result = yomuu.extractTextFeature(texts[start]);
+    	    console.log(result);
 
             start++;
             if (start >= end) return;
