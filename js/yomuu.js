@@ -41,19 +41,24 @@ yomuu.grantAlignment = function(text) {
 // var text = '本日は、晴aaaa天なりaaa。、、、、。。';
 // console.log(yomuu.extractTextFeature(text));
 
-yomuu.blinkLed = function() {
-    var ayatori = new VincluLed(100, 100);
+yomuu.ayatori = new VincluLed(100, 100);
 
-    var on = function() {
-	ayatori.on();
-    };
+yomuu.blinkLed = function(t) {
+    t = typeof t !== 'undefined' ?  t : 100;
 
-    var off = function() {
-	ayatori.off();
-    };
+    return new Promise(function(resolve, reject) {
+	var on = function() {
+	    yomuu.ayatori.on();
+	};
 
-    on();
+	var off = function() {
+	    yomuu.ayatori.off();
+	    resolve();
+	};
 
-    setTimeout(off, 10);
+	on();
+
+	setTimeout(off, t);
+    });
 };
 // yomuu.blinkLed();
