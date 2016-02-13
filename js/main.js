@@ -10,6 +10,16 @@ $(document).on('touchstart', '.cover', function(event) {
 });
 
 $(document).on('pageinit', '#reader', function() {
+    myNavigator.on('postpop', function(e) {
+	// console.log('postpop');
+	// console.log(e);
+
+	var pageName = e.enterPage.name;
+	if (pageName == '') { // index.html
+	    yomuu.blinkLedN(100000, 100);
+	}
+    });
+
     $.get('./data/' + bookName + '.txt', function(data){
         var texts = data.split("。");
         var start = 0;
@@ -27,7 +37,7 @@ $(document).on('pageinit', '#reader', function() {
             TweenMax.to($(document).find('.ten'), 1.3, {
                 y: "-=500",
                 onComplete: function() {
-        		    // yomuu.blinkLedN(12, 100);
+		    yomuu.blinkLedN(12, 100);
 
                     if (!isNextText()) {
                         // デバック
