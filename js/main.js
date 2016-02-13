@@ -10,29 +10,13 @@ $(document).on('pageinit', '#reader', function() {
         $(document).on('touchstart', 'p', requestTextFeature);
 
         function requestTextFeature() {
-            var $request = $.ajax({
-                type: 'post',
-                url: 'https://yomuu-api.herokuapp.com/textFeature',
-                data: {
-                    'text': texts[start]
-                }
-            });
+	    var result = yomuu.extractTextFeature(texts[start]);
+	    console.log(result);
 
-            $request.done(function(res) {
-                console.log(res);
-                start++;
-                if (start >= end) return;
-                $(document).find("p").html(texts[start]);
-            });
+            start++;
+            if (start >= end) return;
 
-            $request.fail(function(xhr, status, error) {
-                console.log(error);
-            });
-
-            /* デバック用 */
-            // start++;
-            // if (start >= end) return;
-            // $(document).find("p").html(texts[start]);
+            $(document).find("p").html(texts[start]);
         }
 
         function offEvent() {
