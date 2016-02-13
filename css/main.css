@@ -35,3 +35,13 @@
 p {
   font-size: 30px;
 }
+
+span {
+  font-size: 30px;
+}
+
+img{
+  margin: 0;
+  padding: 0;
+  vertical-align: bottom;
+}

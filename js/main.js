@@ -15,6 +15,7 @@ $(document).on('pageinit', '#reader', function() {
         var start = 0;
         var end = texts.length;
 
+        // デバック要
         start = end - 10;
 
         showContents();
@@ -26,9 +27,9 @@ $(document).on('pageinit', '#reader', function() {
             TweenMax.to($(document).find('.ten'), 1.3, {
                 y: "-=500",
                 onComplete: function() {
-		    // yomuu.blinkLedN(12, 100);
+        		    // yomuu.blinkLedN(12, 100);
 
-                    if (isNextText()) {
+                    if (!isNextText()) {
                         usrInfo['restBooks']--;
                         usrInfo['endBooks']++;
                         $('#read').html(usrInfo['endBooks']);
@@ -38,11 +39,14 @@ $(document).on('pageinit', '#reader', function() {
                             $('#chara').attr('src', 'img/laughmarukunS.gif');
                         }
 
+                        start = end - 10;
+
                         var pages = myNavigator.getPages();
                         pages[pages.length - 2].destroy();
                         myNavigator.popPage();
+                    } else {
+                        showContents();
                     }
-                    showContents();
                 }
             }, 0.1);
         }
@@ -58,8 +62,8 @@ $(document).on('pageinit', '#reader', function() {
 
             if (isNextText) {
                 var contents = yomuu.grantAlignment(text);
+                $(document).find("p#contents").html(contents);
             }
-            $(document).find("p#contents").html(contents);
         }
 
         function offEvent() {
@@ -67,7 +71,7 @@ $(document).on('pageinit', '#reader', function() {
         }
 
         function isNextText() {
-            return start > end;
+            return start < end;
         }
     });
 });
@@ -81,23 +85,23 @@ $(document).on('pageinit', '#log', function() {
 
     // 円グラフが表示されるサンプルコード
     var opts = {
-      lines: 12, // The number of lines to draw
-      angle: 0.35, // The length of each line
-      lineWidth: 0.1, // The line thickness
+      lines: 12,
+      angle: 0.35,
+      lineWidth: 0.1,
       pointer: {
-        length: 0.9, // The radius of the inner circle
-        strokeWidth: 0.035, // The rotation offset
-        color: '#000000' // Fill color
+        length: 0.9,
+        strokeWidth: 0.035,
+        color: '#000000'
       },
-      limitMax: 'false',   // If true, the pointer will not go past the end of the gauge
-      colorStart: '#6F6EA0',   // Colors
-      colorStop: '#C0C0DB',    // just experiment with them
-      strokeColor: '#EEEEEE',   // to see which ones work best for you
+      limitMax: 'false',
+      colorStart: '#6F6EA0',
+      colorStop: '#C0C0DB',
+      strokeColor: '#EEEEEE',
       generateGradient: true
     };
-    var target = document.getElementById('graph'); // your canvas element
-    usrInfo["gauge"] = new Donut(target).setOptions(opts); // create sexy gauge!
-    usrInfo["gauge"].maxValue = 100; // set max gauge value
-    usrInfo["gauge"].animationSpeed = 32; // set animation speed (32 is default value)
-    usrInfo["gauge"].set(usrInfo["kutouten"]); // set actual value
+    var target = document.getElementById('graph');
+    usrInfo["gauge"] = new Donut(target).setOptions(opts);
+    usrInfo["gauge"].maxValue = 100;
+    usrInfo["gauge"].animationSpeed = 32;
+    usrInfo["gauge"].set(usrInfo["kutouten"]);
 });
