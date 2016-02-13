@@ -1,90 +1,79 @@
 var usrInfo = {};
 
 $(document).on('pageinit', '#reader', function() {
-    $.get('./data/sample.txt', function(data){
-        // var texts = data.split(/\r\n|\r|\n/);
+    $.get('./data/neko.txt', function(data){
         var texts = data.split("。");
-        var text = ""
         var start = 0;
         var end = texts.length;
-        console.log(end);
 
-        finishReading();
+        showContents();
 
         $(document).on('touchstart', '#reader ons-back-button', offEvent);
-        $(document).on('touchstart', 'p', requestTextFeature);
+        $(document).on('touchstart', 'p', nextContents);
 
-        function finishReading() {
-            text = ""
-            for (var i = 0; i < 4; i++) {
+        function nextContents() {
+            TweenMax.to($(document).find('.ten'), 1.3, {
+                y: "-=500",
+                onComplete: function() {
+		    yomuu.blinkLed();
+
+                    if (isNextText()) {
+                        var pages = myNavigator.getPages();
+                        pages[pages.length - 2].destroy();
+                        myNavigator.popPage();
+                    }
+                    showContents()
+                }
+            }, 0.1);
+        }
+
+        function showContents() {
+            var text = ""
+            for (var i = 0; i < 5; i++) {
                 text += texts[start] + "。";
                 start++;
             }
-
-            if (start > end) {
-                return true;
-            }
-
-            var result = "";
-            tmp = text.split('。');
-            for (var i = 0; i < tmp.length; i++) {
-                if (i !== tmp.length - 1) {
-                    result = result + (tmp[i] + "<div class='ten'>。</div>");
-                }
-            }
-
-            var tmp = result.split('、');
-            if (tmp.length >= 2) {
-                result = ""
-                for (var i = 0; i < tmp.length; i++) {
-                    if (i !== tmp.length - 1) {
-                        result += (tmp[i] + "<div class='ten'>、</div>");
-                    } else {
-                        result += tmp[i];
-                    }
-                }
-            }
-
             var num = yomuu.extractTextFeature(text);
-            console.log(text);
-            console.log(num);
 
-            $(document).find("p#contents").html(result);
-            return false;
-        }
-
-        function requestTextFeature() {
-            var promise = $.when(
-                $(document).find('.ten').each(function(index, element) {
-                    var offset = $(element).offset();
-                    console.log("left = " + offset.left + ", top = " + offset.top);
-                })
-            );
-
-            promise.done(function() {
-                TweenMax.to($(document).find('.ten'), 1, {
-                    y: "+=500",
-                    onComplete: function() {
-			yomuu.blinkLed();
-
-                        console.log("test");
-                        if (finishReading()) {
-                            var pages = myNavigator.getPages();
-                            pages[pages.length - 2].destroy();
-                            myNavigator.popPage();
-                            console.log(pages);
-                        }
-                    }
-                }, 0.1);
-            });
-        }
-
-        function finishedReading() {
-            return start > end;
+            if (isNextText) {
+                var contents = yomuu.grantAlignment(text);
+            }
+            $(document).find("p#contents").html(contents);
         }
 
         function offEvent() {
             $(document).off('touchstart', 'p', requestTextFeature);
         }
+
+        function isNextText() {
+            return start > end;
+        }
+
+        // function finishReading() {
+        //     var result = "";
+        //     tmp = text.split('。');
+        //     for (var i = 0; i < tmp.length; i++) {
+        //         if (i !== tmp.length - 1) {
+        //             result = result + (tmp[i] + "<div class='ten'>。</div>");
+        //         }
+        //     }
+
+        //     var tmp = result.split('、');
+        //     if (tmp.length >= 2) {
+        //         result = ""
+        //         for (var i = 0; i < tmp.length; i++) {
+        //             if (i !== tmp.length - 1) {
+        //                 result += (tmp[i] + "<div class='ten'>、</div>");
+        //             } else {
+        //                 result += tmp[i];
+        //             }
+        //         }
+        //     }
+
+        //     var num = yomuu.extractTextFeature(text);
+        //     $(document).find("p#contents").html(result);
+
+        //     return false;
+        // }
     });
 });
