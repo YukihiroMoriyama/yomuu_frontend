@@ -1,7 +1,16 @@
-var usrInfo = {};
+var usrInfo = {
+    restBooks: 5, // 積読数
+    endBooks: 0, // 読書数
+    kutouten: 0,
+};
+
+var bookName = "";
+$(document).on('touchstart', '.cover', function(event) {
+    bookName = event.target.alt;
+});
 
 $(document).on('pageinit', '#reader', function() {
-    $.get('./data/neko.txt', function(data){
+    $.get('./data/' + bookName + '.txt', function(data){
         var texts = data.split("。");
         var start = 0;
         var end = texts.length;
@@ -40,7 +49,7 @@ $(document).on('pageinit', '#reader', function() {
         }
 
         function offEvent() {
-            $(document).off('touchstart', 'p', requestTextFeature);
+            $(document).off('touchstart', 'p', nextContents);
         }
 
         function isNextText() {
