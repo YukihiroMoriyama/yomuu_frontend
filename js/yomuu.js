@@ -64,6 +64,8 @@ yomuu.blinkLed = function(t) {
 // yomuu.blinkLed();
 
 yomuu.blinkLedN = function(n, t) {
+    t = typeof t !== 'undefined' ?  t : 100;
+
     var p = yomuu.blinkLed();
     for (var i = 1; i < n; i++) {
 	p = p.then(function() {
