@@ -62,3 +62,12 @@ yomuu.blinkLed = function(t) {
     });
 };
 // yomuu.blinkLed();
+
+yomuu.blinkLedN = function(n, t) {
+    var p = yomuu.blinkLed();
+    for (var i = 1; i < n; i++) {
+	p = p.then(function() {
+	    return yomuu.blinkLed(t);
+	});
+    }
+};
