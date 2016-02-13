@@ -27,7 +27,7 @@ yomuu.grantAlignment = function(text) {
     var tmp = result.split('、');
     if (tmp.length >= 2) {
         result = "";
-        for (var i = 0; i < tmp.length; i++) {
+        for (i = 0; i < tmp.length; i++) {
             if (i !== tmp.length - 1) {
                 result += (tmp[i] + "<div class='ten'>、</div>");
             } else {
