@@ -1,8 +1,30 @@
-<ons-page>
+<ons-page id="log">
     <ons-toolbar>
         <div class="left">
             <ons-back-button>戻る</ons-back-button>
         </div>
-        <div class="center">ログ</div>
+        <div class="center">ステータス</div>
     </ons-toolbar>
+
+    <h1>読んだ本の冊数</h1>
+    <ons-row align="bottom">
+        <ons-col align="right">
+        </ons-col>
+
+        <ons-col align="center">
+            <p><span id="read"></span>冊</p>
+        </ons-col>
+    </ons-row>
+
+
+    <h1>集めたテンまるの数</h1>
+    <ons-row align="bottom">
+        <ons-col align="right">
+            <p><span id="tenmaru"></span>%</p>
+        </ons-col>
+
+        <ons-col align="right">
+            <canvas width="150" height="100" id="graph"></canvas>
+        </ons-col>
+    </ons-row>
 </ons-page>
