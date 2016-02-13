@@ -35,7 +35,7 @@ yomuu.grantAlignment = function(text) {
             }
         }
     }
-    return "<br><br><br><br>" + result;
+    return "<br><br><br><br><br><br>" + result;
 }
 
 // var text = '本日は、晴aaaa天なりaaa。、、、、。。';
