@@ -5,7 +5,7 @@ $(document).on('pageinit', '#reader', function() {
         // var texts = data.split(/\r\n|\r|\n/);
         var texts = data.split("。");
         var text = ""
-        var start = 7475;
+        var start = 0;
         var end = texts.length;
         console.log(end);
 
@@ -26,7 +26,6 @@ $(document).on('pageinit', '#reader', function() {
             }
 
             var result = "";
-
             tmp = text.split('。');
             for (var i = 0; i < tmp.length; i++) {
                 if (i !== tmp.length - 1) {
@@ -35,14 +34,19 @@ $(document).on('pageinit', '#reader', function() {
             }
 
             var tmp = result.split('、');
-            console.log(tmp);
-            for (var i = 0; i < tmp.length; i++) {
-                if (i !== tmp.length - 1) {
-                    result = result + (tmp[i] + "<div class='ten'>、</div>");
+            if (tmp.length >= 2) {
+                result = ""
+                for (var i = 0; i < tmp.length; i++) {
+                    if (i !== tmp.length - 1) {
+                        result += (tmp[i] + "<div class='ten'>、</div>");
+                    } else {
+                        result += tmp[i];
+                    }
                 }
             }
 
             var num = yomuu.extractTextFeature(text);
+            console.log(text);
             console.log(num);
 
             $(document).find("p#contents").html(result);
@@ -50,35 +54,27 @@ $(document).on('pageinit', '#reader', function() {
         }
 
         function requestTextFeature() {
-            // var promise = $.when(
-            //     $(document).find('.ten').each(function(index, element) {
-            //         var offset = $(element).offset();
-            //         console.log("left = " + offset.left + ", top = " + offset.top);
-            //     })
-            // );
+            var promise = $.when(
+                $(document).find('.ten').each(function(index, element) {
+                    var offset = $(element).offset();
+                    console.log("left = " + offset.left + ", top = " + offset.top);
+                })
+            );
 
-            // promise.done(function() {
-            //     TweenMax.to($(element), 1, {
-            //         y: "+=300"
-            //     },
-            //     onComplete: function() {
-
-            //     });
-
-            //     if (finishReading()) {
-            //         var pages = myNavigator.getPages();
-            //         pages[pages.length - 2].destroy();
-            //         myNavigator.popPage();
-            //         console.log(pages);
-            //     }
-            // });
-
-            if (finishReading()) {
-                var pages = myNavigator.getPages();
-                pages[pages.length - 2].destroy();
-                myNavigator.popPage();
-                console.log(pages);
-            }
+            promise.done(function() {
+                TweenMax.to($(document).find('.ten'), 1, {
+                    y: "+=500",
+                    onComplete: function() {
+                        console.log("test");
+                        if (finishReading()) {
+                            var pages = myNavigator.getPages();
+                            pages[pages.length - 2].destroy();
+                            myNavigator.popPage();
+                            console.log(pages);
+                        }
+                    }
+                }, 0.1);
+            });
         }
 
         function finishedReading() {
