@@ -15,7 +15,7 @@ $(document).on('pageinit', '#reader', function() {
         var start = 0;
         var end = texts.length;
 
-        // デバック要
+        // デバック
         start = end - 10;
 
         showContents();
@@ -30,15 +30,19 @@ $(document).on('pageinit', '#reader', function() {
 		    yomuu.blinkLedN(12, 100);
 
                     if (!isNextText()) {
-                        usrInfo['restBooks']--;
-                        usrInfo['endBooks']++;
+                        // デバック
+                        usrInfo['restBooks'] -= 5;
+                        usrInfo['endBooks'] += 5;
                         $('#read').html(usrInfo['endBooks']);
                         $('#top').attr('src', 'img/tundoku/book2d' + usrInfo['restBooks'] + '.png');
 
                         if (usrInfo['restBooks'] === 0) {
-                            $('#chara').attr('src', 'img/laughmarukunS.gif');
+                            $('#chara').attr('src', 'img/lovemarukun.gif');
+                            $('#chara').attr('width', '40%');
+                            $('#click').attr('onclick', 'location.href = "http://shopping.yahoo.co.jp/category/10002/recommend?sc_i=shp_pc_top_cate_book_maga_comi:10002:rcmd";');
                         }
 
+                        // デバック
                         start = end - 10;
 
                         var pages = myNavigator.getPages();
