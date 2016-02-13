@@ -13,12 +13,23 @@
 </script>
 
 <body>
-    <ons-sliding-menu
-      main-page="bookshelf.html"
-      menu-page="menu.html"
-      side="left"
-      var="menu">
-    </ons-sliding-menu>
+    <ons-navigator title="Navigator" var="myNavigator">
+        <ons-page>
+            <ons-toolbar>
+                <div class="center">トップページ</div>
+            </ons-toolbar>
+            <div style="text-align: center">
+                <br>
+                <ons-button modifier="light" onclick="myNavigator.pushPage('bookshelf.html', { animation : 'slide' } )">
+                    本棚
+                </ons-button>
+
+                <ons-button modifier="light" onclick="myNavigator.pushPage('log.html', { animation : 'slide' } )">
+                    ログ
+                </ons-button>
+            </div>
+        </ons-page>
+    </ons-navigator>
 
     <script src="./js/main.js"></script>
 </body>

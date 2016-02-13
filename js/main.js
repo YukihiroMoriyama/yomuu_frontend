@@ -50,15 +50,24 @@ $(document).on('pageinit', '#reader', function() {
             $request.done(function(res) {
                 console.log(res);
 
-                TweenMax.staggerTo(".ten", 0.5, {y:200}, 0.5, showText);
+                // TweenMax.staggerTo(".ten", 0.5, {y:200}, 0.0, showText);
                 // TweenMax.to(".ten", 0.5, {
                 //   y: "+=300"
                 // },);
 
-                // $(document).find('.ten').each(function(index.element) {
-                //     var offset = $(element).offset();
-                //     console.log("left = " + offset.left + ", top = " + offset.top);
+                // $.each($(document).find('.ten'), function(index.element) {
+                    // var offset = $(element).offset();
+                    // console.log("left = " + offset.left + ", top = " + offset.top);
                 // });
+
+                $(document).find('.ten').each(function(index, element) {
+                    var offset = $(element).offset();
+                    console.log("left = " + offset.left + ", top = " + offset.top);
+
+                    TweenMax.to($(element), 1, {
+                        y: "+=300"
+                    });
+                });
             });
 
             $request.fail(function(xhr, status, error) {
