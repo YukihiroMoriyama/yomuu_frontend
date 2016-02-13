@@ -65,6 +65,8 @@ $(document).on('pageinit', '#reader', function() {
                 TweenMax.to($(document).find('.ten'), 1, {
                     y: "+=500",
                     onComplete: function() {
+			yomuu.blinkLed();
+
                         console.log("test");
                         if (finishReading()) {
                             var pages = myNavigator.getPages();
