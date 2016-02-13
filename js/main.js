@@ -1,21 +1,28 @@
+var usrInfo = {};
+
 $(document).on('pageinit', '#reader', function() {
     $.get('./data/sample.txt', function(data){
         // var texts = data.split(/\r\n|\r|\n/);
         var texts = data.split("。");
         var text = ""
-        var start = 0;
+        var start = 7475;
         var end = texts.length;
+        console.log(end);
 
-        showText();
+        finishReading();
 
         $(document).on('touchstart', '#reader ons-back-button', offEvent);
         $(document).on('touchstart', 'p', requestTextFeature);
 
-        function showText() {
+        function finishReading() {
             text = ""
             for (var i = 0; i < 4; i++) {
                 text += texts[start] + "。";
                 start++;
+            }
+
+            if (start > end) {
+                return true;
             }
 
             var result = "";
@@ -35,17 +42,47 @@ $(document).on('pageinit', '#reader', function() {
                 }
             }
 
-            $(document).find("p").html(result);
+            var num = yomuu.extractTextFeature(text);
+            console.log(num);
+
+            $(document).find("p#contents").html(result);
+            return false;
         }
 
         function requestTextFeature() {
-    	    var result = yomuu.extractTextFeature(texts[start]);
-    	    console.log(result);
+            // var promise = $.when(
+            //     $(document).find('.ten').each(function(index, element) {
+            //         var offset = $(element).offset();
+            //         console.log("left = " + offset.left + ", top = " + offset.top);
+            //     })
+            // );
 
-            start++;
-            if (start >= end) return;
+            // promise.done(function() {
+            //     TweenMax.to($(element), 1, {
+            //         y: "+=300"
+            //     },
+            //     onComplete: function() {
 
-            $(document).find("p").html(texts[start]);
+            //     });
+
+            //     if (finishReading()) {
+            //         var pages = myNavigator.getPages();
+            //         pages[pages.length - 2].destroy();
+            //         myNavigator.popPage();
+            //         console.log(pages);
+            //     }
+            // });
+
+            if (finishReading()) {
+                var pages = myNavigator.getPages();
+                pages[pages.length - 2].destroy();
+                myNavigator.popPage();
+                console.log(pages);
+            }
+        }
+
+        function finishedReading() {
+            return start > end;
         }
 
         function offEvent() {
