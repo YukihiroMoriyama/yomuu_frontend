@@ -39,45 +39,14 @@ $(document).on('pageinit', '#reader', function() {
         }
 
         function requestTextFeature() {
-            var $request = $.ajax({
-                type: 'get',
-                url: 'https://yomuu-api.herokuapp.com/textFeature',
-                data: {
-                    'text': text
-                }
-            });
 
-            $request.done(function(res) {
-                console.log(res);
+	    var result = yomuu.extractTextFeature(texts[start]);
+	    console.log(result);
 
-                // TweenMax.staggerTo(".ten", 0.5, {y:200}, 0.0, showText);
-                // TweenMax.to(".ten", 0.5, {
-                //   y: "+=300"
-                // },);
+            start++;
+            if (start >= end) return;
 
-                // $.each($(document).find('.ten'), function(index.element) {
-                    // var offset = $(element).offset();
-                    // console.log("left = " + offset.left + ", top = " + offset.top);
-                // });
-
-                $(document).find('.ten').each(function(index, element) {
-                    var offset = $(element).offset();
-                    console.log("left = " + offset.left + ", top = " + offset.top);
-
-                    TweenMax.to($(element), 1, {
-                        y: "+=300"
-                    });
-                });
-            });
-
-            $request.fail(function(xhr, status, error) {
-                console.log(error);
-            });
-
-            /* デバック用 */
-            // start++;
-            // if (start >= end) return;
-            // $(document).find("p").html(texts[start]);
+            $(document).find("p").html(texts[start]);
         }
 
         function offEvent() {
